@@ -17,7 +17,7 @@ const Search = () => {
         console.error(error);
         setIsLoading(false);
       }
-    }, 1000); // 2000 milliseconds (2 seconds)
+    }, 2000); // 2000 milliseconds (2 seconds)
   };
 
   return (
@@ -30,8 +30,19 @@ const Search = () => {
       }}
     >
       <button
-        style={{ marginTop: "4rem", marginBottom: "2rem" }}
+        style={{
+          marginTop: "2rem",
+          marginBottom: "1rem",
+          padding: "10px 20px",
+          fontSize: "1rem",
+          cursor: isLoading ? "not-allowed" : "pointer",
+          backgroundColor: isLoading ? "#ccc" : "#007BFF",
+          color: "#fff",
+          border: "none",
+          borderRadius: "5px",
+        }}
         onClick={handleChange}
+        disabled={isLoading}
       >
         Change
       </button>
@@ -41,9 +52,13 @@ const Search = () => {
         <div>
           {results &&
             results?.results?.map((user) => (
-              <div>
-                <img src={user.picture.large} alt="user" />
-                <p style={{ textAlign: "center" }} key={user.login.uuid}>
+              <div key={user.login.uuid} style={{ margin: "1rem" }}>
+                <img
+                  src={user.picture.large}
+                  alt="user"
+                  style={{ borderRadius: "30%" }}
+                />
+                <p style={{ textAlign: "center", marginTop: "0.5rem" }}>
                   {user.name.first}
                 </p>
               </div>
